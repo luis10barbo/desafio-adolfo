@@ -1,0 +1,29 @@
+.app-header {
+    display: flex;
+    width: 100%;
+    background: #55a9f8;
+    align-items: center;
+    gap:2rem;
+}
+
+#app-logo {
+    margin-right: auto;
+    height: 24px;
+}
+
+.user-info {
+    display:flex;
+}
+
+.user-metadata {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-button {
+    $button-size: 32px;
+
+    height: $button-size;
+    width: $button-size;
+    aspect-ratio: square;
+}
