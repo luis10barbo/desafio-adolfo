@@ -9,6 +9,8 @@ $color-primary-2: #17b66e;
     align-items: center;
     gap: $header-padding;
     padding: $header-padding;
+
+    color:white;
 }
 
 #app-logo {
@@ -162,4 +164,16 @@ $color-primary-2: #17b66e;
 .titulo-noticias-holder {
     padding-bottom: 1rem;
     border-bottom: 1px solid #DDD;
+}
+
+@media (max-width: 1000px) {
+    .noticias-holder {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .noticias-holder {
+        grid-template-columns: 1fr;
+    }
 }
