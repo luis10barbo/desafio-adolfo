@@ -1,9 +1,14 @@
+$header-padding: 1rem;
+$color-primary: #08844c;
+$color-primary-2: #17b66e;
 .app-header {
+    
     display: flex;
     width: 100%;
-    background: #55a9f8;
+    background: $color-primary;
     align-items: center;
-    gap:2rem;
+    gap: $header-padding;
+    padding: $header-padding;
 }
 
 #app-logo {
@@ -13,6 +18,7 @@
 
 .user-info {
     display:flex;
+    gap: ($header-padding / 2)
 }
 
 .user-metadata {
@@ -21,9 +27,139 @@
 }
 
 .notification-button {
+    background-color: transparent;
+    border: none;
+    color: white;
     $button-size: 32px;
 
     height: $button-size;
     width: $button-size;
     aspect-ratio: square;
+}
+
+.notification-button:hover {
+    background-color: #0c6e42;
+    border-radius: 100%;
+}
+
+#titulo-pagina {
+    font-size: 72px;
+    background: -webkit-linear-gradient($color-primary, $color-primary-2, $color-primary);
+    // -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin:0;
+}
+
+.subtitulo-pagina {
+    color: #505050;
+    text-align: center;
+    font-size: 24px;
+}
+
+.pagina {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+    gap:2rem;
+    align-items: center;
+}
+
+.pagina-info {
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+}
+
+.card-pesquisa {
+    max-width: 800px;
+    width: 100%;
+}
+
+.card-pesquisa-content {
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+}
+
+.input-holder {
+    display:flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+}
+
+#periodo span {
+    width: 100%;
+}
+
+::ng-deep .busca-input > * {
+    width: 100%;
+    display: flex;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.limpar-filtros {
+    color: $color-primary;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-right: auto;
+}
+.limpar-filtros:hover {
+    color: $color-primary-2;
+    
+}
+
+::ng-deep .cancelar-botao > button {
+    background-color: transparent;
+    color: #505050;
+    border: solid 1px #505050;
+}
+::ng-deep .cancelar-botao:hover > button {
+    background-color: #505050;
+    color: white;
+}
+
+
+::ng-deep .aplicar-filtro-botao > button {
+    background-color: #b68834;
+    color:white;
+    border: none;
+}
+
+.noticias-holder {
+    max-width: 1000px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.ver-mais-noticias {
+    padding: 1rem;
+    border: none;
+    background-color: $color-primary;
+    border-radius: 0.25rem;
+    color: white;
+    transition: 75ms;
+    cursor: pointer;
+}
+.ver-mais-noticias:hover {
+    background-color: #17b66e;
+}
+
+
+.titulo-noticias-holder {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #DDD;
 }

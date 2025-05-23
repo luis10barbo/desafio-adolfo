@@ -1,8 +1,9 @@
 <header class="app-header">
   <img id="app-logo">
   <button class="notification-button">
+    <i class="pi pi-bell"></i>
     <div class="notification-number">
-
+      
     </div>
   </button>
   <div class="user-info">
@@ -13,3 +14,68 @@
     <button class="dropdown"></button>
   </div>
 </header>
+<div class="pagina">
+  <div class="pagina-info">
+    <h1 id="titulo-pagina">
+        Explore os <br> Melhores Dados
+    </h1>
+    <p class="subtitulo-pagina">Descubra o trabalho dos gestores de dados do estado de Goiás.</p>
+  </div>
+  
+  <p-card class="card-pesquisa">
+    <div class="card-pesquisa-content">
+      <div class="row">
+        <div class="input-holder">
+          <label for="periodo">Periodo</label>
+          <p-calendar 
+            id="periodo"
+          [(ngModel)]="date1" 
+          selectionMode="range" 
+          class="busca-input"
+          [readonlyInput]="true" ></p-calendar>
+        </div>
+
+        <div class="input-holder">
+          <label for="periodo">Áreas Temáticas</label>
+          <p-multiSelect 
+          [options]="orgaos" 
+          [(ngModel)]="orgaosSelecionados" 
+          optionLabel="name" 
+          class="busca-input"
+          placeholder="Selecionar Área Temática" ></p-multiSelect>
+        </div>
+      </div>
+      
+
+      <div class="row">
+        <div class="input-holder">
+          <label for="periodo">Órgãos</label>
+          <p-multiSelect 
+          [options]="orgaos" 
+          [(ngModel)]="orgaosSelecionados" 
+          optionLabel="name" 
+          class="busca-input"
+          placeholder="Selecionar Orgão" ></p-multiSelect>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="limpar-filtros">Limpar Filtros</button>
+        <p-button label="Cancelar" class="cancelar-botao"></p-button>
+        <p-button label="Aplicar Filtro" class="aplicar-filtro-botao"></p-button>
+      </div>
+
+    </div>
+
+  </p-card>
+
+  <section>
+    <h2 class="titulo-noticias-holder">
+      Noticias em Destaque
+    </h2>
+    <div class="noticias-holder">
+      <app-noticia></app-noticia>
+    </div>
+  </section>
+  <button class="ver-mais-noticias">Ver mais notícias</button>
+</div>

@@ -1,0 +1,22 @@
+.noticia-holder {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+}
+.imagem-noticia {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: white;
+    border-radius: 1rem;
+}
+
+.informacao-noticia {
+    display: flex;
+    font-size: 12px;
+    gap:0.25rem;
+}
+
+.tempo-leitura-noticia {
+    margin-left: auto;
+}
