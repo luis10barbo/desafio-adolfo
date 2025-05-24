@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class OrgaoInstitucionalModel {
+public class OrgaoInstitucional {
     Integer id;
     String titulo;
 }

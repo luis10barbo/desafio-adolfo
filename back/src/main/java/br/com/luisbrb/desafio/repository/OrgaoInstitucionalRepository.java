@@ -10,26 +10,26 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import br.com.luisbrb.desafio.model.OrgaoInstitucionalModel;
+import br.com.luisbrb.desafio.model.OrgaoInstitucional;
 
 @Repository
-public class OrgaoInstitucionalRepository extends BaseRepository<OrgaoInstitucionalModel> {
+public class OrgaoInstitucionalRepository extends BaseRepository<OrgaoInstitucional> {
     public OrgaoInstitucionalRepository(JdbcTemplate template) {
         super(template, "orgao_institucional");
     }
 
-    public void inserir(OrgaoInstitucionalModel orgaoInstitucional) {
+    public void inserir(OrgaoInstitucional orgaoInstitucional) {
         LinkedHashMap<String, Object> tabelas = new LinkedHashMap<>(Map.ofEntries(
             Map.entry("titulo", orgaoInstitucional.getTitulo())
         ));
         super.inserir(orgaoInstitucional.getId(), tabelas);
     }
 
-    public List<OrgaoInstitucionalModel> adquirir() {        
-        RowMapper<OrgaoInstitucionalModel> mapper = new RowMapper<OrgaoInstitucionalModel>() {
+    public List<OrgaoInstitucional> adquirir() {        
+        RowMapper<OrgaoInstitucional> mapper = new RowMapper<OrgaoInstitucional>() {
             @Override
-            public OrgaoInstitucionalModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-                OrgaoInstitucionalModel o = new OrgaoInstitucionalModel();
+            public OrgaoInstitucional mapRow(ResultSet rs, int rowNum) throws SQLException {
+                OrgaoInstitucional o = new OrgaoInstitucional();
                 o.setId(rs.getInt(1));
                 o.setTitulo(rs.getString(2));
                 return o;
@@ -39,7 +39,7 @@ public class OrgaoInstitucionalRepository extends BaseRepository<OrgaoInstitucio
         return super.adquirir(mapper); 
     }
 
-    public void atualizar(OrgaoInstitucionalModel orgaoInstitucionalModel) {
+    public void atualizar(OrgaoInstitucional orgaoInstitucionalModel) {
         LinkedHashMap<String, Object> tabelas = new LinkedHashMap<>(Map.ofEntries(
             Map.entry("titulo", orgaoInstitucionalModel.getTitulo())
         ));
