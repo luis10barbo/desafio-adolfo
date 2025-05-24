@@ -1,16 +1,11 @@
 package br.com.luisbrb.desafio.repository;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import br.com.luisbrb.desafio.model.OrgaoInstitucionalModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -2,7 +2,6 @@ package br.com.luisbrb.desafio.model;
 
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
