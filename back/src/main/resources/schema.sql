@@ -18,7 +18,7 @@ CREATE TABLE area_tematica (
 CREATE TABLE noticia (
     id SERIAL PRIMARY KEY,
     titulo TEXT NOT NULL,
-    atualizado_em TIMESTAMP DEFAULT now(),
+    atualizado_em TIMESTAMPTZ DEFAULT now(),
     minutos_leitura INTEGER
 );
 

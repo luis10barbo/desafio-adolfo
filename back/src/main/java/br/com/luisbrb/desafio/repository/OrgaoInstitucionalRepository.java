@@ -45,9 +45,4 @@ public class OrgaoInstitucionalRepository extends BaseRepository<OrgaoInstitucio
         ));
         super.atualizar(orgaoInstitucionalModel.getId(), tabelas);
     }
-
-    // public void atualizar(OrgaoInstitucionalModel orgaoInstitucionalModel) {
-    //     String sql = "UPDATE " + getNomeTabela() + " SET titulo=? WHERE id=?";
-    //     getTemplate().update(sql, orgaoInstitucionalModel.getTitulo(), orgaoInstitucionalModel.getId());
-    // }
 }
