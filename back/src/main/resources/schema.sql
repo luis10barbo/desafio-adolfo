@@ -6,17 +6,17 @@ DROP TABLE IF EXISTS noticia;
 
 
 CREATE TABLE orgao_institucional (
-    id_orgao_institucional SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     titulo TEXT NOT NULL
 );
 
 CREATE TABLE area_tematica (
-    id_area_tematica SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     titulo TEXT NOT NULL
 );
 
 CREATE TABLE noticia (
-    id_noticia SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     titulo TEXT NOT NULL,
     atualizado_em TIMESTAMP DEFAULT now(),
     minutos_leitura INTEGER
@@ -27,8 +27,8 @@ CREATE TABLE noticia_orgao_institucional (
     id_noticia INTEGER NOT NULL,
     id_orgao_institucional INTEGER NOT NULL,
 
-    FOREIGN KEY (id_noticia) REFERENCES noticia(id_noticia),
-    FOREIGN KEY (id_orgao_institucional) REFERENCES orgao_institucional(id_orgao_institucional)
+    FOREIGN KEY (id_noticia) REFERENCES noticia(id),
+    FOREIGN KEY (id_orgao_institucional) REFERENCES orgao_institucional(id)
 );
 
 CREATE TABLE noticia_area_tematica (
@@ -36,6 +36,6 @@ CREATE TABLE noticia_area_tematica (
     id_noticia INTEGER NOT NULL,
     id_area_tematica INTEGER NOT NULL,
 
-    FOREIGN KEY (id_noticia) REFERENCES noticia(id_noticia),
-    FOREIGN KEY (id_area_tematica) REFERENCES area_tematica(id_area_tematica)
+    FOREIGN KEY (id_noticia) REFERENCES noticia(id),
+    FOREIGN KEY (id_area_tematica) REFERENCES area_tematica(id)
 )

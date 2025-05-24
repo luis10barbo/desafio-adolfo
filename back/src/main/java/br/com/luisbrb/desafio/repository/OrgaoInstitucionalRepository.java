@@ -2,7 +2,9 @@ package br.com.luisbrb.desafio.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,24 +13,19 @@ import org.springframework.stereotype.Repository;
 import br.com.luisbrb.desafio.model.OrgaoInstitucionalModel;
 
 @Repository
-public class OrgaoInstitucionalRepository extends BaseRepository {
-    private JdbcTemplate template;
-    private final String NOME_TABELA = "orgao_institucional"; 
-
+public class OrgaoInstitucionalRepository extends BaseRepository<OrgaoInstitucionalModel> {
     public OrgaoInstitucionalRepository(JdbcTemplate template) {
-        this.template = template;
-        
+        super(template, "orgao_institucional");
     }
 
     public void inserir(OrgaoInstitucionalModel orgaoInstitucional) {
-        String sql = "INSERT INTO " + NOME_TABELA + "(titulo) VALUES (?)";
-        int rows = template.update(sql, orgaoInstitucional.getTitulo());
-        System.out.println(rows);
+        LinkedHashMap<String, Object> tabelas = new LinkedHashMap<>(Map.ofEntries(
+            Map.entry("titulo", orgaoInstitucional.getTitulo())
+        ));
+        super.inserir(orgaoInstitucional.getId(), tabelas);
     }
 
-    public List<OrgaoInstitucionalModel> adquirir() {
-        String sql = "SELECT * FROM " + NOME_TABELA;
-        
+    public List<OrgaoInstitucionalModel> adquirir() {        
         RowMapper<OrgaoInstitucionalModel> mapper = new RowMapper<OrgaoInstitucionalModel>() {
             @Override
             public OrgaoInstitucionalModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -39,7 +36,18 @@ public class OrgaoInstitucionalRepository extends BaseRepository {
             }
         };
 
-        List<OrgaoInstitucionalModel> orgaosInstitucionais = template.query(sql, mapper);
-        return orgaosInstitucionais;        
+        return super.adquirir(mapper); 
     }
+
+    public void atualizar(OrgaoInstitucionalModel orgaoInstitucionalModel) {
+        LinkedHashMap<String, Object> tabelas = new LinkedHashMap<>(Map.ofEntries(
+            Map.entry("titulo", orgaoInstitucionalModel.getTitulo())
+        ));
+        super.atualizar(orgaoInstitucionalModel.getId(), tabelas);
+    }
+
+    // public void atualizar(OrgaoInstitucionalModel orgaoInstitucionalModel) {
+    //     String sql = "UPDATE " + getNomeTabela() + " SET titulo=? WHERE id=?";
+    //     getTemplate().update(sql, orgaoInstitucionalModel.getTitulo(), orgaoInstitucionalModel.getId());
+    // }
 }
