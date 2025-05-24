@@ -1,4 +1,4 @@
-package br.com.luisbrb.desafio.model;
+package br.com.luisbrb.desafio.spring.model;
 
 
 import java.sql.Timestamp;

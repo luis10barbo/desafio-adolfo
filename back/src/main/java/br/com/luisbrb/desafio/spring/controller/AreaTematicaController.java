@@ -1,12 +1,15 @@
-package br.com.luisbrb.desafio.controller;
+package br.com.luisbrb.desafio.spring.controller;
+
+
+// package br.com.luisbrb.desafio.spring.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.luisbrb.desafio.model.AreaTematica;
-import br.com.luisbrb.desafio.repository.AreaTematicaRepository;
+import br.com.luisbrb.desafio.spring.model.AreaTematica;
+import br.com.luisbrb.desafio.spring.repository.AreaTematicaRepository;
 
 @RestController
 @RequestMapping("/api/areaTematica")

@@ -1,12 +1,12 @@
-package br.com.luisbrb.desafio.controller;
+package br.com.luisbrb.desafio.spring.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.luisbrb.desafio.model.NoticiaOrgaoInstitucional;
-import br.com.luisbrb.desafio.repository.NoticiaOrgaoInstitucionalRepository;
+import br.com.luisbrb.desafio.spring.model.NoticiaOrgaoInstitucional;
+import br.com.luisbrb.desafio.spring.repository.NoticiaOrgaoInstitucionalRepository;
 
 @RestController
 @RequestMapping("/api/noticiaOrgaoInstitucional")

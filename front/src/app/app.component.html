@@ -38,8 +38,8 @@
         <div class="input-holder">
           <label for="periodo">Áreas Temáticas</label>
           <p-multiSelect 
-          [options]="orgaos" 
-          [(ngModel)]="orgaosSelecionados" 
+          [options]="areasTematicas" 
+          [(ngModel)]="areasTematicasSelecionadas" 
           optionLabel="name" 
           class="busca-input"
           placeholder="Selecionar Área Temática" ></p-multiSelect>
@@ -52,7 +52,7 @@
           <label for="periodo">Órgãos</label>
           <p-multiSelect 
           [options]="orgaos" 
-          [(ngModel)]="orgaosSelecionados" 
+          [(ngModel)]="orgaos" 
           optionLabel="name" 
           class="busca-input"
           placeholder="Selecionar Orgão" ></p-multiSelect>

@@ -1,4 +1,4 @@
-package br.com.luisbrb.desafio.repository;
+package br.com.luisbrb.desafio.spring.repository;
 
 import java.sql.ResultSet;
 import java.util.LinkedHashMap;
@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import br.com.luisbrb.desafio.model.Noticia;
+import br.com.luisbrb.desafio.spring.model.Noticia;
 
 @Repository
 public class NoticiaRepository extends BaseRepository<Noticia> {

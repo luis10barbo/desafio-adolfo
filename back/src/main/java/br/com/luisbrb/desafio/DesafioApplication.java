@@ -3,8 +3,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import br.com.luisbrb.desafio.model.OrgaoInstitucional;
-import br.com.luisbrb.desafio.repository.OrgaoInstitucionalRepository;
+import br.com.luisbrb.desafio.spring.model.AreaTematica;
+import br.com.luisbrb.desafio.spring.model.OrgaoInstitucional;
+import br.com.luisbrb.desafio.spring.repository.AreaTematicaRepository;
+import br.com.luisbrb.desafio.spring.repository.OrgaoInstitucionalRepository;
 
 @SpringBootApplication
 public class DesafioApplication {
@@ -12,9 +14,7 @@ public class DesafioApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(DesafioApplication.class, args);
 		OrgaoInstitucionalRepository repo = context.getBean(OrgaoInstitucionalRepository.class);
-		repo.inserir(new OrgaoInstitucional(null, "Teste"));
-		System.out.println(repo.adquirir().toString());
-		repo.atualizar(new OrgaoInstitucional(1, "Luis"));
-		System.out.println(repo.adquirir().toString());
+		repo.inserir(new OrgaoInstitucional(null, "Detran"));
+		context.getBean(AreaTematicaRepository.class).inserir(new AreaTematica(null, "Detran"));
 	}
 }

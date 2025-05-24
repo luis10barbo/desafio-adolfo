@@ -1,4 +1,4 @@
-package br.com.luisbrb.desafio.controller;
+package br.com.luisbrb.desafio.spring.controller;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.luisbrb.desafio.model.OrgaoInstitucional;
-import br.com.luisbrb.desafio.repository.OrgaoInstitucionalRepository;
+import br.com.luisbrb.desafio.spring.model.OrgaoInstitucional;
+import br.com.luisbrb.desafio.spring.repository.OrgaoInstitucionalRepository;
 
 @RestController
 @RequestMapping("/api/orgaoInstitucional")

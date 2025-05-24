@@ -1,4 +1,4 @@
-package br.com.luisbrb.desafio.repository;
+package br.com.luisbrb.desafio.spring.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import br.com.luisbrb.desafio.model.OrgaoInstitucional;
+import br.com.luisbrb.desafio.spring.model.OrgaoInstitucional;
 
 @Repository
 public class OrgaoInstitucionalRepository extends BaseRepository<OrgaoInstitucional> {

@@ -1,4 +1,4 @@
-package br.com.luisbrb.desafio.repository;
+package br.com.luisbrb.desafio.spring.repository;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;

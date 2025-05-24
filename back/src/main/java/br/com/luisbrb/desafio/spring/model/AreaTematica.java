@@ -1,10 +1,15 @@
-package br.com.luisbrb.desafio.model;
+package br.com.luisbrb.desafio.spring.model;
 
+// package br.com.luisbrb.desafio.spring.model;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@AllArgsConstructor
 @RequiredArgsConstructor
 @ToString
 @Getter
