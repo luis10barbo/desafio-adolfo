@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import br.com.luisbrb.desafio.spring.model.interfaces.QueriesViaObjeto;
-import br.com.luisbrb.desafio.spring.model.tabelas.NoticiaOrgaoInstitucional;
 import br.com.luisbrb.desafio.spring.model.tabelas.OrgaoInstitucional;
 
 @Repository

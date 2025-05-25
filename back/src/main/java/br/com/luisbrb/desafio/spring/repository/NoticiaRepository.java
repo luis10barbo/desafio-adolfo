@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import br.com.luisbrb.desafio.spring.model.interfaces.QueriesViaObjeto;
 import br.com.luisbrb.desafio.spring.model.tabelas.Noticia;
-import br.com.luisbrb.desafio.spring.model.tabelas.NoticiaOrgaoInstitucional;
 
 @Repository
 public class NoticiaRepository extends BaseRepository<Noticia> implements QueriesViaObjeto<Noticia> {

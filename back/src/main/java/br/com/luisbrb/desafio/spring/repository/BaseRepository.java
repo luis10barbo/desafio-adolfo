@@ -1,6 +1,5 @@
 package br.com.luisbrb.desafio.spring.repository;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
