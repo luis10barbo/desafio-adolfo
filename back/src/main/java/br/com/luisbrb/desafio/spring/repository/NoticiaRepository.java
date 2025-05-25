@@ -21,11 +21,10 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
     }
 
     public Integer inserir(Noticia noticia) {
-        LinkedHashMap<String, Object> tabelas = new LinkedHashMap<>(Map.ofEntries(
-            Map.entry("titulo", noticia.getTitulo()),
-            Map.entry("atualizado_em", noticia.getAtualizadoEm()),
-            Map.entry("minutos_leitura", noticia.getMinutosLeitura())
-        ));
+        LinkedHashMap<String, Object> tabelas = new LinkedHashMap<>();
+        tabelas.put("titulo", noticia.getTitulo());
+        tabelas.put("atualizado_em", noticia.getAtualizadoEm());
+        tabelas.put("minutos_leitura", noticia.getMinutosLeitura());
         return super.inserir(noticia.getId(), tabelas);
     }
 

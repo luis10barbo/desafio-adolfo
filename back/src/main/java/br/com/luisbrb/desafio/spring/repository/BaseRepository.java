@@ -3,6 +3,8 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,16 +22,22 @@ public abstract class BaseRepository<T> {
 
     public Integer inserir(Object id, LinkedHashMap<String, Object> tables) {
         ArrayList<Object> args = new ArrayList<>();
-        args.addAll(tables.values());
+
+        // Ignorar tabelas com valores nulos
+        Map<String, Object> filteredTables = tables.entrySet().stream()
+        .filter(entry -> entry.getValue() != null)
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> b, LinkedHashMap::new));
+
+        args.addAll(filteredTables.values());
 
         String rowsToUpdate = String.join(
             ", ",
-            tables.keySet().stream().toList()
+            filteredTables.keySet().stream().toList()
         );
 
         String rowsValues = String.join(
             ", ",
-            tables.keySet().stream().map(o -> "?").toList()
+            filteredTables.keySet().stream().map(o -> "?").toList()
         );
 
         String sql = "INSERT INTO " + nomeTabela + " (" + rowsToUpdate + ") VALUES (" + rowsValues + ")";
