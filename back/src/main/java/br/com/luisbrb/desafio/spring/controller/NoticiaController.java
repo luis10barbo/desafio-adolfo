@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.luisbrb.desafio.spring.model.Noticia;
+import br.com.luisbrb.desafio.spring.model.tabelas.Noticia;
 import br.com.luisbrb.desafio.spring.repository.NoticiaRepository;
 
 @RestController
@@ -33,5 +33,10 @@ public class NoticiaController {
     @PostMapping("/atualizar")
     public void atualizar(@RequestBody Noticia noticia) {
         noticiaRepository.atualizar(noticia);
+    }
+
+    @GetMapping("/adquirir")
+    public List<Noticia> adquirir(@RequestParam("areasTematicas") int[] areasTematicas, @RequestParam("orgaosInstitucionais") int[] orgaosInstitucionais) {
+        return noticiaRepository.adquirir(areasTematicas, orgaosInstitucionais);
     }
 }

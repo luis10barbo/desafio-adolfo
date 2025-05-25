@@ -10,19 +10,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import br.com.luisbrb.desafio.spring.model.OrgaoInstitucional;
+import br.com.luisbrb.desafio.spring.model.interfaces.QueriesViaObjeto;
+import br.com.luisbrb.desafio.spring.model.tabelas.NoticiaOrgaoInstitucional;
+import br.com.luisbrb.desafio.spring.model.tabelas.OrgaoInstitucional;
 
 @Repository
-public class OrgaoInstitucionalRepository extends BaseRepository<OrgaoInstitucional> {
+public class OrgaoInstitucionalRepository extends BaseRepository<OrgaoInstitucional> implements QueriesViaObjeto<OrgaoInstitucional> {
     public OrgaoInstitucionalRepository(JdbcTemplate template) {
         super(template, "orgao_institucional");
     }
 
-    public void inserir(OrgaoInstitucional orgaoInstitucional) {
+    public Integer inserir(OrgaoInstitucional orgaoInstitucional) {
         LinkedHashMap<String, Object> tabelas = new LinkedHashMap<>(Map.ofEntries(
             Map.entry("titulo", orgaoInstitucional.getTitulo())
         ));
-        super.inserir(orgaoInstitucional.getId(), tabelas);
+        return super.inserir(orgaoInstitucional.getId(), tabelas);
     }
 
     public List<OrgaoInstitucional> adquirir() {        

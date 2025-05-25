@@ -9,20 +9,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import br.com.luisbrb.desafio.spring.model.NoticiaAreaTematica;
+import br.com.luisbrb.desafio.spring.model.interfaces.QueriesViaObjeto;
+import br.com.luisbrb.desafio.spring.model.tabelas.NoticiaAreaTematica;
 
 @Repository
-public class NoticiaAreaTematicaRepository extends BaseRepository<NoticiaAreaTematica> {
+public class NoticiaAreaTematicaRepository extends BaseRepository<NoticiaAreaTematica> implements QueriesViaObjeto<NoticiaAreaTematica> {
     public NoticiaAreaTematicaRepository(JdbcTemplate template) {
         super(template, "noticia_area_tematica");
     }
 
-    public void inserir(NoticiaAreaTematica model) {
+    public Integer inserir(NoticiaAreaTematica model) {
         LinkedHashMap<String, Object> tabelas = new LinkedHashMap<>(Map.ofEntries(
             Map.entry("id_noticia", model.getIdNoticia()),
             Map.entry("id_area_tematica", model.getIdAreaTematica())
         ));
-        super.inserir(model.getId(), tabelas);
+        return super.inserir(model.getId(), tabelas);
     }
 
     public List<NoticiaAreaTematica> adquirir() {

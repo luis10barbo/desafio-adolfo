@@ -51,8 +51,8 @@
         <div class="input-holder">
           <label for="periodo">Órgãos</label>
           <p-multiSelect 
-          [options]="orgaos" 
-          [(ngModel)]="orgaos" 
+          [options]="orgaoInstitucional" 
+          [(ngModel)]="orgaoInstitucionalSelecionadas" 
           optionLabel="name" 
           class="busca-input"
           placeholder="Selecionar Orgão" ></p-multiSelect>
@@ -60,9 +60,9 @@
       </div>
 
       <div class="row">
-        <button class="limpar-filtros">Limpar Filtros</button>
+        <button class="limpar-filtros" (click)="limparFiltros()">Limpar Filtros</button>
         <p-button label="Cancelar" class="cancelar-botao"></p-button>
-        <p-button label="Aplicar Filtro" class="aplicar-filtro-botao"></p-button>
+        <p-button label="Aplicar Filtro" class="aplicar-filtro-botao" (onClick)="adquirirNoticias()"></p-button>
       </div>
 
     </div>
@@ -74,7 +74,8 @@
       Noticias em Destaque
     </h2>
     <div class="noticias-holder">
-      <app-noticia></app-noticia>
+      <!-- @for (noticia of noticias; track noticia.id) { -->
+        <app-noticia [noticia]="noticia" *ngFor="let noticia of noticias"></app-noticia>
     </div>
   </section>
   <button class="ver-mais-noticias">Ver mais notícias</button>

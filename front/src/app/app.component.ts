@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { AreaTematicaService } from './service/area-tematica/area-tematica.service';
 import { AreaTematica } from './model/AreaTematicaModel';
+import { OrgaoInstitucionalService } from './service/orgao-institucional/orgao-institucional.service';
+import { OrgaoInstitucional } from './model/OrgaoInstitucionalModel';
+import { NoticiasService } from './service/noticias/noticias.service';
+import { Noticia } from './model/NoticiaModel';
 
 type OrgaoSelect = {
   name: string,
-  code: string
+  code: number,
+  orgaoInstitucional: OrgaoInstitucional
 }
 
 type AreaTematicaSelect = {
   name: string,
-  code: string,
+  code: number,
   areaTematica: AreaTematica
 }
 
@@ -20,14 +25,46 @@ type AreaTematicaSelect = {
 })
 export class AppComponent {
   date1: Date | undefined = undefined;
-  orgaos: OrgaoSelect[] = [{name: "Segurança publica", code: "SP"}, {name: "Saúde", code: "SA"},]
   
   areasTematicasSelecionadas: AreaTematicaSelect[] = []
   areasTematicas: AreaTematicaSelect[] = [];
 
-  constructor(private areaTematicaService: AreaTematicaService) {
-    areaTematicaService.getAreasTematicas().subscribe((areasTematicas) => {
-      this.areasTematicas = areasTematicas.map((value) => {return {areaTematica: value, code: value.titulo, name: value.titulo}});
+  orgaoInstitucionalSelecionadas: OrgaoSelect[] = []
+  orgaoInstitucional: OrgaoSelect[] = [];
+
+  noticias: Noticia[] = []
+
+  constructor(areaTematicaService: AreaTematicaService, orgaoInstitucionalService: OrgaoInstitucionalService, private noticiasService: NoticiasService) {
+    areaTematicaService.adquirir().subscribe((areasTematicas) => {
+      this.areasTematicas = areasTematicas.map((value) => {return {areaTematica: value, code: value.id, name: value.titulo}});
+    })
+    
+    orgaoInstitucionalService.adquirir().subscribe((orgaoInstitucional) => {
+      this.orgaoInstitucional = orgaoInstitucional.map((value) => {
+        return {code: value.id, name: value.titulo, orgaoInstitucional: value}
+      })  
+    })
+
+    this.adquirirNoticias();
+  }
+
+  limparFiltros() {
+    this.date1 = undefined;
+    this.areasTematicasSelecionadas = [];
+    this.orgaoInstitucionalSelecionadas = [];
+  }
+
+  adquirirNoticias() {
+    console.log(this.areasTematicasSelecionadas, this.orgaoInstitucionalSelecionadas);
+    this.noticiasService.adquirir(
+      this.areasTematicasSelecionadas.map((value) => {
+        return value.code
+      }),
+      this.orgaoInstitucionalSelecionadas.map((value) => {
+        return value.code
+      })
+    ).subscribe((res) => {
+      this.noticias = res;
     })
   }
 }

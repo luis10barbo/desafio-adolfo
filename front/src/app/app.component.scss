@@ -145,6 +145,7 @@ $color-primary-2: #17b66e;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap:1rem;
 }
 
 .ver-mais-noticias {
@@ -175,5 +176,8 @@ $color-primary-2: #17b66e;
 @media (max-width: 500px) {
     .noticias-holder {
         grid-template-columns: 1fr;
+    }
+    .row {
+        flex-wrap: wrap;
     }
 }

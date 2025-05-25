@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.luisbrb.desafio.spring.model.NoticiaOrgaoInstitucional;
+import br.com.luisbrb.desafio.spring.model.tabelas.NoticiaOrgaoInstitucional;
 import br.com.luisbrb.desafio.spring.repository.NoticiaOrgaoInstitucionalRepository;
 
 @RestController

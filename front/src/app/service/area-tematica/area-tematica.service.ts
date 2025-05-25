@@ -12,7 +12,7 @@ export class AreaTematicaService {
 
   }
 
-  getAreasTematicas() {
+  adquirir() {
     return this.httpClient.get<AreaTematica[]>(`${environment.urlBackend}/areaTematica/todos`);
   }
 }

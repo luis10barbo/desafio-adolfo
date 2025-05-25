@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.luisbrb.desafio.spring.model.OrgaoInstitucional;
+import br.com.luisbrb.desafio.spring.model.tabelas.OrgaoInstitucional;
 import br.com.luisbrb.desafio.spring.repository.OrgaoInstitucionalRepository;
 
 @RestController

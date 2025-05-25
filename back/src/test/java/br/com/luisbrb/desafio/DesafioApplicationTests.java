@@ -1,4 +1,4 @@
-package br.com.luisbrb.desafio.spring;
+package br.com.luisbrb.desafio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

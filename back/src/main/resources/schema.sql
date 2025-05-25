@@ -38,4 +38,10 @@ CREATE TABLE noticia_area_tematica (
 
     FOREIGN KEY (id_noticia) REFERENCES noticia(id),
     FOREIGN KEY (id_area_tematica) REFERENCES area_tematica(id)
-)
+);
+
+CREATE INDEX idx_noticia_orgao_noticia ON noticia_orgao_institucional(id_noticia);
+CREATE INDEX idx_noticia_orgao_orgao ON noticia_orgao_institucional(id_orgao_institucional);
+
+CREATE INDEX idx_noticia_area_noticia ON noticia_area_tematica(id_noticia);
+CREATE INDEX idx_noticia_area_area ON noticia_area_tematica(id_area_tematica);

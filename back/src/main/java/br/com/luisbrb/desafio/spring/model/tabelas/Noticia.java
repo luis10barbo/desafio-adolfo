@@ -1,13 +1,15 @@
-package br.com.luisbrb.desafio.spring.model;
+package br.com.luisbrb.desafio.spring.model.tabelas;
 
 
 import java.sql.Timestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@AllArgsConstructor
 @RequiredArgsConstructor
 @ToString
 @Getter

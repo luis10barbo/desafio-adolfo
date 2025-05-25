@@ -1,4 +1,4 @@
-package br.com.luisbrb.desafio.spring.model;
+package br.com.luisbrb.desafio.spring.model.tabelas;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
