@@ -127,6 +127,6 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
 
         List<Noticia> noticias = getTemplate().query(sql, mapper, arguments.toArray(new Object[0]));
 
-        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticias.subList(0, 8)), noticias.size() > 8 ? true : false, offset + Math.min(noticias.size(), 8));        
+        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticias.subList(0, Math.min(noticias.size(), 8))), noticias.size() > 8 ? true : false, offset + Math.min(noticias.size(), 8));        
     }
 }
