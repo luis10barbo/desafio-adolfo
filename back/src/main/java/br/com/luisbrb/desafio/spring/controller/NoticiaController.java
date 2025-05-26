@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import br.com.luisbrb.desafio.spring.model.ResultadoPaginado;
 import br.com.luisbrb.desafio.spring.model.tabelas.Noticia;
 import br.com.luisbrb.desafio.spring.repository.NoticiaRepository;
 
@@ -36,7 +37,7 @@ public class NoticiaController {
     }
 
     @GetMapping("/adquirir")
-    public List<Noticia> adquirir(@RequestParam("areasTematicas") int[] areasTematicas, @RequestParam("orgaosInstitucionais") int[] orgaosInstitucionais) {
-        return noticiaRepository.adquirir(areasTematicas, orgaosInstitucionais);
+    public ResultadoPaginado<List<Noticia>> adquirir(@RequestParam("areasTematicas") int[] areasTematicas, @RequestParam("orgaosInstitucionais") int[] orgaosInstitucionais, @RequestParam("offset") int offset) {
+        return noticiaRepository.adquirir(areasTematicas, orgaosInstitucionais, offset);
     }
 }

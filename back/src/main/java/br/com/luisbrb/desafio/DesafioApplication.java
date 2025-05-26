@@ -38,6 +38,20 @@ public class DesafioApplication {
 		context.getBean(NoticiaOrgaoInstitucionalRepository.class).inserir(new NoticiaOrgaoInstitucional(null, idNoticia, idOrgaoInstitucional2));
 
 		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+		context.getBean(NoticiaRepository.class).inserir(new Noticia(null, "Outra noticia sem orgao ou area tematica", null, 8));
+
 
 	}
 }

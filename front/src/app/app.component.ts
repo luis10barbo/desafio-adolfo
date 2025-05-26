@@ -34,6 +34,9 @@ export class AppComponent {
 
   noticias: Noticia[] = []
 
+  temProximaPagina: boolean = false;
+  proximoOffset = 0;
+
   constructor(areaTematicaService: AreaTematicaService, orgaoInstitucionalService: OrgaoInstitucionalService, private noticiasService: NoticiasService) {
     areaTematicaService.adquirir().subscribe((areasTematicas) => {
       this.areasTematicas = areasTematicas.map((value) => {return {areaTematica: value, code: value.id, name: value.titulo}});
@@ -45,7 +48,7 @@ export class AppComponent {
       })  
     })
 
-    this.adquirirNoticias();
+    this.adquirirNoticias(0);
   }
 
   limparFiltros() {
@@ -54,17 +57,32 @@ export class AppComponent {
     this.orgaoInstitucionalSelecionadas = [];
   }
 
-  adquirirNoticias() {
-    console.log(this.areasTematicasSelecionadas, this.orgaoInstitucionalSelecionadas);
+  adquirirNoticias(offset: number) {
     this.noticiasService.adquirir(
       this.areasTematicasSelecionadas.map((value) => {
         return value.code
       }),
       this.orgaoInstitucionalSelecionadas.map((value) => {
         return value.code
-      })
+      }),
+      offset
     ).subscribe((res) => {
-      this.noticias = res;
+      if (offset == 0) {
+        this.noticias = res.resultado;
+      } else {
+        this.noticias = [...this.noticias, ...res.resultado];
+      }
+      this.temProximaPagina = res.temProximaPagina;
+      this.proximoOffset = res.offsetProximaPagina;
     })
+
+  }
+
+  pesquisarNoticias() {
+    this.adquirirNoticias(0);
+  }
+
+  verMaisNoticias() {
+    this.adquirirNoticias(this.proximoOffset);
   }
 }
