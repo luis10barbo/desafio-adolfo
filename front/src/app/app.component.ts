@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AreaTematicaService } from './service/area-tematica/area-tematica.service';
 import { AreaTematica } from './model/AreaTematicaModel';
 import { OrgaoInstitucionalService } from './service/orgao-institucional/orgao-institucional.service';
@@ -37,6 +37,8 @@ export class AppComponent {
   temProximaPagina: boolean = false;
   proximoOffset = 0;
 
+  @ViewChild('noticiaHolder') noticiaHolder!: ElementRef<HTMLDivElement>; 
+
   constructor(areaTematicaService: AreaTematicaService, orgaoInstitucionalService: OrgaoInstitucionalService, private noticiasService: NoticiasService) {
     areaTematicaService.adquirir().subscribe((areasTematicas) => {
       this.areasTematicas = areasTematicas.map((value) => {return {areaTematica: value, code: value.id, name: value.titulo}});
@@ -67,13 +69,20 @@ export class AppComponent {
       }),
       offset
     ).subscribe((res) => {
+      res.resultado = res.resultado.map((noticia) => {
+        noticia.atualizadoEm = new Date(noticia.atualizadoEm);
+        return noticia;
+      })
+
       if (offset == 0) {
         this.noticias = res.resultado;
+        this.noticiaHolder.nativeElement.scrollIntoView({behavior:'smooth'});
       } else {
         this.noticias = [...this.noticias, ...res.resultado];
       }
       this.temProximaPagina = res.temProximaPagina;
       this.proximoOffset = res.offsetProximaPagina;
+
     })
 
   }

@@ -4,19 +4,36 @@
     flex-direction: column;
     gap: 1rem;
 }
-.imagem-noticia {
+.imagem-noticia-holder {
     width: 100%;
     aspect-ratio: 16/9;
     background: white;
     border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.imagem-noticia {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+    object-position: 50%;
 }
 
 .informacao-noticia {
     display: flex;
     font-size: 12px;
     gap:0.25rem;
+    flex-wrap: wrap;
 }
 
-.tempo-leitura-noticia {
+.autor-noticia {
     margin-left: auto;
 }
+
+// .titulo-noticia {
+//     text-align: justify;
+// }

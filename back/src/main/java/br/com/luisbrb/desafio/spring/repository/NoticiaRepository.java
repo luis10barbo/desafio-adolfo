@@ -28,6 +28,8 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
         tabelas.put("titulo", noticia.getTitulo());
         tabelas.put("atualizado_em", noticia.getAtualizadoEm());
         tabelas.put("minutos_leitura", noticia.getMinutosLeitura());
+        tabelas.put("autor", noticia.getAutor());
+        tabelas.put("img", noticia.getImg());
         return super.inserir(noticia.getId(), tabelas);
     }
 
@@ -38,6 +40,8 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
             n.setTitulo(rs.getString(2));
             n.setAtualizadoEm(rs.getTimestamp(3));
             n.setMinutosLeitura(rs.getInt(4));
+            n.setAutor(rs.getString(5));
+            n.setImg(rs.getBytes(6));
             return n;
         };
 
@@ -67,6 +71,8 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
             n.setTitulo(rs.getString(2));
             n.setAtualizadoEm(rs.getTimestamp(3));
             n.setMinutosLeitura(rs.getInt(4));
+            n.setAutor(rs.getString(5));
+            n.setImg(rs.getBytes(6));
             return n;
         };
 

@@ -19,4 +19,6 @@ public class Noticia {
     private String titulo; 
     private Timestamp atualizadoEm;
     private int minutosLeitura;
+    private String autor;
+    private byte[] img;
 }

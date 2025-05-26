@@ -1,10 +1,10 @@
 <div class="noticia-holder">
-    <div class="imagem-noticia">
-
+    <div class="imagem-noticia-holder">
+        <img *ngIf="noticia.img.length > 0" [src]="'data:image/png;base64,' + noticia.img" class="imagem-noticia">
     </div>
     <p class="titulo-noticia">{{noticia.titulo}}</p>
     <p class="informacao-noticia">
-        Atualizado em {{noticia.atualizadoEm}} - por <b>Wellis</b> <span class="tempo-leitura-noticia"> {{noticia.minutosLeitura}} min</span>
+        Atualizado em {{noticia.atualizadoEm.toLocaleString()}} - por <b class="autor-noticia">{{ noticia.autor }}</b> <span class="tempo-leitura-noticia"> {{noticia.minutosLeitura}} min</span>
     </p>
 </div>
 

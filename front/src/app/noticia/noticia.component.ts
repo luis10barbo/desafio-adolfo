@@ -10,10 +10,10 @@ export class NoticiaComponent implements OnInit {
 
   @Input("noticia")
   noticia!: Noticia
-
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.noticia);
   }
 
 }

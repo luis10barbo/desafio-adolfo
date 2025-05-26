@@ -19,7 +19,9 @@ CREATE TABLE noticia (
     id SERIAL PRIMARY KEY,
     titulo TEXT NOT NULL,
     atualizado_em TIMESTAMPTZ DEFAULT now(),
-    minutos_leitura INTEGER
+    minutos_leitura INTEGER,
+    autor TEXT,
+    img BYTEA
 );
 
 CREATE TABLE noticia_orgao_institucional (
