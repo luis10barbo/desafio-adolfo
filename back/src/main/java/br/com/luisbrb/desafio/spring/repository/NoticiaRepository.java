@@ -78,9 +78,6 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
     public ResultadoPaginado<List<Noticia>> adquirir(int[] areaTematicas, int[] orgaosInstitucionais, Integer offset, LocalDateTime dataInicio, LocalDateTime dataFinal) {
         String whereString = "";
         List<Object> arguments = new LinkedList<>();
-        String areasTematicasWhere = " nat.id_area_tematica IN (" + IntStream.range(0, areaTematicas.length).mapToObj(a -> "?").collect(Collectors.joining(",")) + ")";
-        String orgaosInstitucionaisWhere = " noi.id_orgao_institucional IN (" +  IntStream.range(0, orgaosInstitucionais.length).mapToObj(a -> "?").collect(Collectors.joining(",")) + ")";
-        String dataWhere = " n.atualizado_em BETWEEN ? AND ? ";
 
         RowMapper<Noticia> mapper = (ResultSet rs, int rowNum) -> {
             Noticia n = new Noticia();
@@ -92,20 +89,21 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
             // n.setImg(rs.getBytes(6));
             return n;
         };
-
+        
+        // Adicionar Dinamicamente WHERE para filtros, se especificados.
         List<String> whereClauses = new ArrayList<>();
         if (areaTematicas.length > 0) {
-            whereClauses.add(areasTematicasWhere);
+            whereClauses.add(" nat.id_area_tematica IN (" + IntStream.range(0, areaTematicas.length).mapToObj(a -> "?").collect(Collectors.joining(",")) + ")");
             Arrays.stream(areaTematicas).forEach(arguments::add);
         }
 
         if (orgaosInstitucionais.length > 0) {
-            whereClauses.add(orgaosInstitucionaisWhere);
+            whereClauses.add(" noi.id_orgao_institucional IN (" +  IntStream.range(0, orgaosInstitucionais.length).mapToObj(a -> "?").collect(Collectors.joining(",")) + ")");
             Arrays.stream(orgaosInstitucionais).forEach(arguments::add);
         }
 
         if (dataInicio != null && dataFinal != null) {
-            whereClauses.add(dataWhere);
+            whereClauses.add(" n.atualizado_em BETWEEN ? AND ? ");
             arguments.add(dataInicio);
             arguments.add(dataFinal);
         }
@@ -113,41 +111,22 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
         if (whereClauses.size() > 0) {
             whereString = "WHERE " + String.join(" OR ", whereClauses);
         }
+        // --- Fim Adicao Where ---
+
         arguments.add(offset != null ? offset : 0);
 
-
-        String sql = "WITH noticias_ids AS (" +
-        "SELECT n.id " +
+        String sql = 
+        "SELECT n.* " +
         "FROM noticia n " +
         "LEFT JOIN noticia_orgao_institucional noi ON n.id = noi.id_noticia " +
         "LEFT JOIN noticia_area_tematica nat ON n.id = nat.id_noticia " +
         whereString + 
         "GROUP BY n.id " +
         "ORDER BY MAX(n.atualizado_em) DESC " +
-        " LIMIT 9 OFFSET ?) " +
+        " LIMIT 9 OFFSET ?";
 
-        "SELECT n.* " +
-        "FROM noticia n " +
-        "JOIN noticias_ids ni ON n.id = ni.id " +
-        "ORDER BY n.atualizado_em DESC;";
-
-
-        // String sql = "SELECT n.* FROM " + getNomeTabela() + " n " + 
-        // "LEFT JOIN noticia_orgao_institucional noi ON n.id = noi.id_noticia " + 
-        // "LEFT JOIN noticia_area_tematica nat ON n.id = nat.id_noticia " + 
-        // whereString + 
-        // " ORDER BY n.atualizado_em DESC " +
-        // "LIMIT 9 OFFSET ?;";
-
-        
         List<Noticia> noticias = getTemplate().query(sql, mapper, arguments.toArray(new Object[0]));
-        
-        LinkedHashMap<Integer, Noticia> noticiaFiltrada = new LinkedHashMap<>(); 
-        for (int i = 0; i < noticias.size() && i < 8; i++) {
-            Noticia noticia = noticias.get(i);
-            noticiaFiltrada.put(noticia.getId(), noticia);
-        }
 
-        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticiaFiltrada.values()), noticias.size() > 8 ? true : false, offset + Math.min(noticias.size(), 8));        
+        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticias.subList(0, 8)), noticias.size() > 8 ? true : false, offset + Math.min(noticias.size(), 8));        
     }
 }
