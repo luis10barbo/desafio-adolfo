@@ -1,5 +1,8 @@
 package br.com.luisbrb.desafio.spring.controller;
 
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.luisbrb.desafio.spring.model.ResultadoPaginado;
 import br.com.luisbrb.desafio.spring.model.tabelas.Noticia;
@@ -26,7 +30,21 @@ public class NoticiaController {
     }
 
     @PostMapping("/criar")
-    public void criar(@RequestBody Noticia noticia) {
+    public void criar(
+        @RequestParam("titulo") String titulo,
+        @RequestParam("minutosLeitura") int minutosLeitura,
+        @RequestParam("autor") String autor,
+        @RequestParam(value = "img", required = false) MultipartFile img
+    ) throws IOException {
+        byte[] imgBytes = img != null && !img.isEmpty() ? img.getBytes() : null;
+        Noticia noticia = new Noticia(
+                null,
+                titulo,
+                Timestamp.from(Instant.now()),
+                minutosLeitura,
+                autor,
+                imgBytes
+        );
         noticiaRepository.inserir(noticia);
     }
 
