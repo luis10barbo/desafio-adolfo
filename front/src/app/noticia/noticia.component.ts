@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Noticia } from '../model/NoticiaModel';
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-noticia',
