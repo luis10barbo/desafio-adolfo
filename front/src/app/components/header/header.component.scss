@@ -1,0 +1,43 @@
+@import "../../app.component.scss";
+.app-header {
+    
+    display: flex;
+    width: 100%;
+    background: $color-primary;
+    align-items: center;
+    gap: $header-padding;
+    padding: $header-padding;
+
+    color:white;
+}
+
+#app-logo {
+    margin-right: auto;
+    height: 24px;
+}
+
+.user-info {
+    display:flex;
+    gap: ($header-padding / 2)
+}
+
+.user-metadata {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    $button-size: 32px;
+
+    height: $button-size;
+    width: $button-size;
+    aspect-ratio: square;
+}
+
+.notification-button:hover {
+    background-color: #0c6e42;
+    border-radius: 100%;
+}

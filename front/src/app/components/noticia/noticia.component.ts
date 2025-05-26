@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Noticia } from '../model/NoticiaModel';
+import { Noticia } from 'src/app/model/NoticiaModel';
 import { environment } from 'src/environments/environment';
 
 @Component({

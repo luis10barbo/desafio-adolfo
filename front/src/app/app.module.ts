@@ -9,13 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
-import { NoticiaComponent } from './noticia/noticia.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './components/header/header.component';
+import { NoticiaComponent } from './components/noticia/noticia.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NoticiaComponent
+    NoticiaComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
