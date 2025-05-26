@@ -3,6 +3,8 @@ package br.com.luisbrb.desafio.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.luisbrb.desafio.spring.model.ResultadoPaginado;
@@ -39,5 +41,19 @@ public class NoticiaController {
     @GetMapping("/adquirir")
     public ResultadoPaginado<List<Noticia>> adquirir(@RequestParam("areasTematicas") int[] areasTematicas, @RequestParam("orgaosInstitucionais") int[] orgaosInstitucionais, @RequestParam("offset") int offset) {
         return noticiaRepository.adquirir(areasTematicas, orgaosInstitucionais, offset);
+    }
+
+    @GetMapping("/imagem")
+    public ResponseEntity<Object> imagem(@RequestParam("id") int id) {
+        byte[] imagemBytes = noticiaRepository.adquirirImagemNoticia(id);
+
+        if (imagemBytes == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(imagemBytes);
     }
 }

@@ -56,12 +56,21 @@ public abstract class BaseRepository<T> {
         return key != null ? key.intValue() : null;
     }
 
-    public List<T> adquirir(RowMapper<T> mapper) {
-        String sql = "SELECT * FROM " + nomeTabela;
+    public List<T> adquirir(RowMapper<T> mapper, Object[] params, String select, String where) {
+        String sql = "SELECT " + select + " FROM " + nomeTabela;
 
-        List<T> orgaosInstitucionais = template.query(sql, mapper);
+        if (where != null && where.length() > 0) {
+            sql += " WHERE " + where;
+        }
+
+        List<T> orgaosInstitucionais = template.query(sql, mapper, params);
         return orgaosInstitucionais;        
     }
+
+    public List<T> adquirir(RowMapper<T> mapper) {
+        return adquirir(mapper, null, "*", null);
+    }
+
 
 
     public boolean remover(Object id) {

@@ -46,14 +46,14 @@ public class DesafioApplication {
 		int idNoticia2 = noticiaRepository.inserir(noticia2);
 		int idNoticia3 = noticiaRepository.inserir(noticia3);
 
-		noticiaRepository.inserir(new Noticia(null, "Produtores rurais inovam com uso de drones inteligentes", null, 5, "Fernanda Lima", image3));
-		noticiaRepository.inserir(new Noticia(null, "Capacitação tecnológica transforma o agronegócio goiano", null, 9, "Marcos Pereira", image1));
-		noticiaRepository.inserir(new Noticia(null, "Como a inteligência artificial está otimizando a pecuária", null, 8, "Juliana Rocha", image2));
-		noticiaRepository.inserir(new Noticia(null, "Senar oferece cursos gratuitos de IA aplicada ao campo", null, 6, "Ricardo Almeida", image3));
-		noticiaRepository.inserir(new Noticia(null, "Transformação digital no agronegócio: desafios e soluções", null, 7, "Patrícia Gomes", image1));
-		noticiaRepository.inserir(new Noticia(null, "Uso de sensores inteligentes melhora produtividade rural", null, 5, "Thiago Fernandes", image2));
-		noticiaRepository.inserir(new Noticia(null, "IA e Big Data revolucionam a gestão agrícola em Goiás", null, 8, "Camila Ribeiro", image3));
-		noticiaRepository.inserir(new Noticia(null, "Tecnologia e sustentabilidade: o futuro do agro", null, 9, "Bruno Costa", image1));
+		noticiaRepository.inserir(new Noticia(null, "Produtores rurais inovam com uso de drones inteligentes", Timestamp.valueOf("2025-05-24 10:15:30"), 5, "Fernanda Lima", image3));
+		noticiaRepository.inserir(new Noticia(null, "Capacitação tecnológica transforma o agronegócio goiano", Timestamp.valueOf("2025-05-22 16:47:12"), 9, "Marcos Pereira", image1));
+		noticiaRepository.inserir(new Noticia(null, "Como a inteligência artificial está otimizando a pecuária", Timestamp.valueOf("2025-05-25 09:05:45"), 8, "Juliana Rocha", image2));
+		noticiaRepository.inserir(new Noticia(null, "Senar oferece cursos gratuitos de IA aplicada ao campo", Timestamp.valueOf("2025-05-23 13:22:18"), 6, "Ricardo Almeida", image3));
+		noticiaRepository.inserir(new Noticia(null, "Transformação digital no agronegócio: desafios e soluções", Timestamp.valueOf("2025-05-21 11:30:50"), 7, "Patrícia Gomes", image1));
+		noticiaRepository.inserir(new Noticia(null, "Uso de sensores inteligentes melhora produtividade rural", Timestamp.valueOf("2025-05-20 15:08:09"), 5, "Thiago Fernandes", image2));
+		noticiaRepository.inserir(new Noticia(null, "IA e Big Data revolucionam a gestão agrícola em Goiás", Timestamp.valueOf("2025-05-25 17:54:37"), 8, "Camila Ribeiro", image3));
+		noticiaRepository.inserir(new Noticia(null, "Tecnologia e sustentabilidade: o futuro do agro", Timestamp.valueOf("2025-05-22 08:41:02"), 9, "Bruno Costa", image1));
 
 
 

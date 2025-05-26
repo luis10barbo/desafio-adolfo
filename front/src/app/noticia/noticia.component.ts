@@ -1,19 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Noticia } from '../model/NoticiaModel';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-noticia',
   templateUrl: './noticia.component.html',
   styleUrls: ['./noticia.component.scss']
 })
-export class NoticiaComponent implements OnInit {
+export class NoticiaComponent {
+
+  backend: string = environment.urlBackend;
 
   @Input("noticia")
   noticia!: Noticia
   constructor() { }
-
-  ngOnInit(): void {
-    console.log(this.noticia);
-  }
 
 }

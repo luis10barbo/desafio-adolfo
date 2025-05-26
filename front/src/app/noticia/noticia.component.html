@@ -1,6 +1,6 @@
 <div class="noticia-holder">
     <div class="imagem-noticia-holder">
-        <img *ngIf="noticia.img.length > 0" [src]="'data:image/png;base64,' + noticia.img" class="imagem-noticia">
+        <img [src]="backend + '/noticia/imagem?id=' + noticia.id" class="imagem-noticia" alt="imagem noticia">
     </div>
     <p class="titulo-noticia">{{noticia.titulo}}</p>
     <p class="informacao-noticia">

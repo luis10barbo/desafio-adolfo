@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AreaTematicaService } from './service/area-tematica/area-tematica.service';
 import { AreaTematica } from './model/AreaTematicaModel';
 import { OrgaoInstitucionalService } from './service/orgao-institucional/orgao-institucional.service';
@@ -23,7 +23,7 @@ type AreaTematicaSelect = {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   date1: Date | undefined = undefined;
   
   areasTematicasSelecionadas: AreaTematicaSelect[] = []
@@ -38,6 +38,8 @@ export class AppComponent {
   proximoOffset = 0;
 
   @ViewChild('noticiaHolder') noticiaHolder!: ElementRef<HTMLDivElement>; 
+  @ViewChild('pagina') pagina!: ElementRef<HTMLDivElement>; 
+
 
   constructor(areaTematicaService: AreaTematicaService, orgaoInstitucionalService: OrgaoInstitucionalService, private noticiasService: NoticiasService) {
     areaTematicaService.adquirir().subscribe((areasTematicas) => {
@@ -50,6 +52,9 @@ export class AppComponent {
       })  
     })
 
+    
+  }
+  ngAfterViewInit(): void {
     this.adquirirNoticias(0);
   }
 
@@ -76,7 +81,6 @@ export class AppComponent {
 
       if (offset == 0) {
         this.noticias = res.resultado;
-        this.noticiaHolder.nativeElement.scrollIntoView({behavior:'smooth'});
       } else {
         this.noticias = [...this.noticias, ...res.resultado];
       }
@@ -84,7 +88,6 @@ export class AppComponent {
       this.proximoOffset = res.offsetProximaPagina;
 
     })
-
   }
 
   pesquisarNoticias() {

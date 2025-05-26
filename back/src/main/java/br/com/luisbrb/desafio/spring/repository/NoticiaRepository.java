@@ -48,6 +48,20 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
         return super.adquirir(mapper);
     }
 
+    public byte[] adquirirImagemNoticia(int id) {
+         RowMapper<Noticia> mapper = (ResultSet rs, int rowNum) -> {
+            Noticia n = new Noticia();
+            n.setImg(rs.getBytes(1));
+            return n;
+        };
+
+        List<Noticia> res = super.adquirir(mapper, new Object[] { id },"img", "id=?");
+        Noticia noticia = res.get(0);
+        if (noticia == null) {
+            return null;
+        }
+        return noticia.getImg();
+    }
 
 
     public void atualizar(Noticia noticia) {
@@ -72,7 +86,7 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
             n.setAtualizadoEm(rs.getTimestamp(3));
             n.setMinutosLeitura(rs.getInt(4));
             n.setAutor(rs.getString(5));
-            n.setImg(rs.getBytes(6));
+            // n.setImg(rs.getBytes(6));
             return n;
         };
 
@@ -104,17 +118,12 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
         
         List<Noticia> noticias = getTemplate().query(sql, mapper, arguments.toArray(new Object[0]));
         
-        boolean temProximaPagina = false;
         LinkedHashMap<Integer, Noticia> noticiaFiltrada = new LinkedHashMap<>(); 
         for (int i = 0; i < noticias.size(); i++) {
-            if (i == 8) {
-                temProximaPagina = true;
-                break;
-            }
             Noticia noticia = noticias.get(i);
             noticiaFiltrada.put(noticia.getId(), noticia);
         }
 
-        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticiaFiltrada.values()), temProximaPagina, offset + 8);        
+        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticiaFiltrada.values()), noticias.size() > 8 ? true : false, offset + 8);        
     }
 }
