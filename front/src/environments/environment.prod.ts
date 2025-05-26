@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlBackend: "http://desafio.luisbrb.com.br/api"
 };
