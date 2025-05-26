@@ -1,7 +1,6 @@
 package br.com.luisbrb.desafio;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
 
@@ -35,22 +34,9 @@ public class DesafioApplication {
 		NoticiaOrgaoInstitucionalRepository noticiaOrgaoInstitucionalRepository = context.getBean(NoticiaOrgaoInstitucionalRepository.class);
 		NoticiaRepository noticiaRepository = context.getBean(NoticiaRepository.class);
 
-		int idOrgaoInstitucional1 = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Detran"));
-		int idOrgaoInstitucional2 = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Outro"));
-		int idAreaTematica = repoAreaTematicaRepository.inserir(new AreaTematica(null, "Detran"));
         byte[] image1 = Files.readAllBytes(Paths.get("./placeholder/1.jpg"));
         byte[] image2 = Files.readAllBytes(Paths.get("./placeholder/3.jpg"));
         byte[] image3 = Files.readAllBytes(Paths.get("./placeholder/4.jpg"));
-
-		Noticia noticia = new Noticia(null, "Tutoria com apoio de IA no Senar Goiás: suporte inteligente e eficas para alunos", null, 8, "Luis", image1);
-		Noticia noticia2 = new Noticia(null, "Avanços na Agricultura de Precisão com IA no Campo", null, 6, "Ana Silva", image1);
-		Noticia noticia3 = new Noticia(null, "Senar Goiás lança plataforma de ensino com IA integrada", null, 7, "Carlos Souza", image2);
-		
-		int idNoticia = noticiaRepository.inserir(noticia);
-
-		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia, idAreaTematica));
-		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia, idOrgaoInstitucional1));
-		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia, idOrgaoInstitucional2));
 
 		int idEmbrapa = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Embrapa"));
 		int idMapa = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Ministério da Agricultura"));
