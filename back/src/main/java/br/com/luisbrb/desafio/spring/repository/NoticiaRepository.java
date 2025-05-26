@@ -132,6 +132,6 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
             noticiaFiltrada.put(noticia.getId(), noticia);
         }
 
-        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticiaFiltrada.values()), noticias.size() > 8 ? true : false, offset + 8);        
+        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticiaFiltrada.values()), noticias.size() > 8 ? true : false, Math.min(offset + noticias.size(), 8));        
     }
 }
