@@ -11,8 +11,8 @@ export class NoticiasService {
 
   constructor(private HttpClient: HttpClient) { }
 
-  adquirir(areasTematicas: number[], orgaosInstitucionais: number[], offset: number) {
-    return this.HttpClient.get<ResultadoPaginado<Noticia[]>>(`${environment.urlBackend}/noticia/adquirir?areasTematicas=${areasTematicas.join(",")}&orgaosInstitucionais=${orgaosInstitucionais.join(",")}&offset=${offset}`);
+  adquirir(areasTematicas: number[], orgaosInstitucionais: number[], offset: number, dateRange: Date[] | undefined = undefined) {
+    return this.HttpClient.get<ResultadoPaginado<Noticia[]>>(`${environment.urlBackend}/noticia/adquirir?areasTematicas=${areasTematicas.join(",")}&orgaosInstitucionais=${orgaosInstitucionais.join(",")}&offset=${offset}&dateStart=${dateRange ? dateRange[0].toISOString() : ""}&dateEnd=${dateRange ? dateRange[1].toISOString() : ""}`);
   }
 
 }

@@ -1,6 +1,8 @@
 package br.com.luisbrb.desafio.spring.repository;
 
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -73,11 +75,12 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
         super.atualizar(noticia.getId(), tabelas);
     }
 
-    public ResultadoPaginado<List<Noticia>> adquirir(int[] areaTematicas, int[] orgaosInstitucionais, Integer offset) {
+    public ResultadoPaginado<List<Noticia>> adquirir(int[] areaTematicas, int[] orgaosInstitucionais, Integer offset, LocalDateTime dataInicio, LocalDateTime dataFinal) {
         String whereString = "";
         List<Object> arguments = new LinkedList<>();
         String areasTematicasWhere = " nat.id_area_tematica IN (" + IntStream.range(0, areaTematicas.length).mapToObj(a -> "?").collect(Collectors.joining(",")) + ")";
         String orgaosInstitucionaisWhere = " noi.id_orgao_institucional IN (" +  IntStream.range(0, orgaosInstitucionais.length).mapToObj(a -> "?").collect(Collectors.joining(",")) + ")";
+        String dataWhere = " n.atualizado_em BETWEEN ? AND ? ";
 
         RowMapper<Noticia> mapper = (ResultSet rs, int rowNum) -> {
             Noticia n = new Noticia();
@@ -90,20 +93,25 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
             return n;
         };
 
-        if (areaTematicas.length > 0 || orgaosInstitucionais.length > 0) {
-            whereString += "WHERE ";
-            if (areaTematicas.length > 0) {
-                whereString += areasTematicasWhere;
-                if (orgaosInstitucionais.length > 0) {
-                    whereString += " OR ";
-                }
-                Arrays.stream(areaTematicas).forEach(arguments::add);
-            }
-    
-            if (orgaosInstitucionais.length > 0) {
-                whereString += orgaosInstitucionaisWhere;
-                Arrays.stream(orgaosInstitucionais).forEach(arguments::add);
-            }
+        List<String> whereClauses = new ArrayList<>();
+        if (areaTematicas.length > 0) {
+            whereClauses.add(areasTematicasWhere);
+            Arrays.stream(areaTematicas).forEach(arguments::add);
+        }
+
+        if (orgaosInstitucionais.length > 0) {
+            whereClauses.add(orgaosInstitucionaisWhere);
+            Arrays.stream(orgaosInstitucionais).forEach(arguments::add);
+        }
+
+        if (dataInicio != null && dataFinal != null) {
+            whereClauses.add(dataWhere);
+            arguments.add(dataInicio);
+            arguments.add(dataFinal);
+        }
+
+        if (whereClauses.size() > 0) {
+            whereString = "WHERE " + String.join(" OR ", whereClauses);
         }
         arguments.add(offset != null ? offset : 0);
 

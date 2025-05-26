@@ -24,7 +24,7 @@ type AreaTematicaSelect = {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  date1: Date | undefined = undefined;
+  date: Date[] | undefined = undefined;
   
   areasTematicasSelecionadas: AreaTematicaSelect[] = []
   areasTematicas: AreaTematicaSelect[] = [];
@@ -59,7 +59,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   limparFiltros() {
-    this.date1 = undefined;
+    this.date = undefined;
     this.areasTematicasSelecionadas = [];
     this.orgaoInstitucionalSelecionadas = [];
   }
@@ -72,7 +72,8 @@ export class AppComponent implements AfterViewInit {
       this.orgaoInstitucionalSelecionadas.map((value) => {
         return value.code
       }),
-      offset
+      offset,
+      this.date
     ).subscribe((res) => {
       res.resultado = res.resultado.map((noticia) => {
         noticia.atualizadoEm = new Date(noticia.atualizadoEm);
@@ -86,7 +87,6 @@ export class AppComponent implements AfterViewInit {
       }
       this.temProximaPagina = res.temProximaPagina;
       this.proximoOffset = res.offsetProximaPagina;
-
     })
   }
 

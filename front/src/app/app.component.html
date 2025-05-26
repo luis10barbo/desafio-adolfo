@@ -9,9 +9,9 @@
   <div class="user-info">
     <div class="user-metadata">
       <p class="user-name">Joaquim</p>
-      <p class="user-orgao">Detran</p>
+      <p class="user-orgao" style="font-size: 12px;">Detran</p>
     </div>
-    <button class="dropdown"></button>
+    <!-- <button class="dropdown"></button> -->
   </div>
 </header>
 <div class="pagina" #pagina >
@@ -29,7 +29,7 @@
           <label for="periodo">Periodo</label>
           <p-calendar 
             id="periodo"
-          [(ngModel)]="date1" 
+          [(ngModel)]="date" 
           selectionMode="range" 
           class="busca-input"
           [readonlyInput]="true" ></p-calendar>
