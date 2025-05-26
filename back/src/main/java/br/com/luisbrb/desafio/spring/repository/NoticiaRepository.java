@@ -116,22 +116,38 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
         arguments.add(offset != null ? offset : 0);
 
 
-        String sql = "SELECT n.* FROM " + getNomeTabela() + " n " + 
-        "LEFT JOIN noticia_orgao_institucional noi ON n.id = noi.id_noticia " + 
-        "LEFT JOIN noticia_area_tematica nat ON n.id = nat.id_noticia " + 
+        String sql = "WITH noticias_ids AS (" +
+        "SELECT n.id " +
+        "FROM noticia n " +
+        "LEFT JOIN noticia_orgao_institucional noi ON n.id = noi.id_noticia " +
+        "LEFT JOIN noticia_area_tematica nat ON n.id = nat.id_noticia " +
         whereString + 
-        " ORDER BY n.atualizado_em DESC " +
-        "LIMIT 9 OFFSET ?;";
+        "GROUP BY n.id " +
+        "ORDER BY MAX(n.atualizado_em) DESC " +
+        " LIMIT 9 OFFSET ?) " +
+
+        "SELECT n.* " +
+        "FROM noticia n " +
+        "JOIN noticias_ids ni ON n.id = ni.id " +
+        "ORDER BY n.atualizado_em DESC;";
+
+
+        // String sql = "SELECT n.* FROM " + getNomeTabela() + " n " + 
+        // "LEFT JOIN noticia_orgao_institucional noi ON n.id = noi.id_noticia " + 
+        // "LEFT JOIN noticia_area_tematica nat ON n.id = nat.id_noticia " + 
+        // whereString + 
+        // " ORDER BY n.atualizado_em DESC " +
+        // "LIMIT 9 OFFSET ?;";
 
         
         List<Noticia> noticias = getTemplate().query(sql, mapper, arguments.toArray(new Object[0]));
         
         LinkedHashMap<Integer, Noticia> noticiaFiltrada = new LinkedHashMap<>(); 
-        for (int i = 0; i < noticias.size(); i++) {
+        for (int i = 0; i < noticias.size() && i < 8; i++) {
             Noticia noticia = noticias.get(i);
             noticiaFiltrada.put(noticia.getId(), noticia);
         }
 
-        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticiaFiltrada.values()), noticias.size() > 8 ? true : false, offset + noticias.size());        
+        return new ResultadoPaginado<List<Noticia>>(new LinkedList<>(noticiaFiltrada.values()), noticias.size() > 8 ? true : false, offset + Math.min(noticias.size(), 8));        
     }
 }
