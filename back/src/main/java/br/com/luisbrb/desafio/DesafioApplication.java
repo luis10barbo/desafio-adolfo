@@ -29,10 +29,15 @@ public class DesafioApplication {
 	}
 
 	public static void criarDadosExemplo(ConfigurableApplicationContext context) throws IOException {
-		OrgaoInstitucionalRepository repo = context.getBean(OrgaoInstitucionalRepository.class);
-		int idOrgaoInstitucional1 = repo.inserir(new OrgaoInstitucional(null, "Detran"));
-		int idOrgaoInstitucional2 = repo.inserir(new OrgaoInstitucional(null, "Outro"));
-		int idAreaTematica = context.getBean(AreaTematicaRepository.class).inserir(new AreaTematica(null, "Detran"));
+		OrgaoInstitucionalRepository repoOrgaoInstitucional = context.getBean(OrgaoInstitucionalRepository.class);
+		AreaTematicaRepository repoAreaTematicaRepository = context.getBean(AreaTematicaRepository.class);
+		NoticiaAreaTematicaRepository noticiaAreaTematicaRepository = context.getBean(NoticiaAreaTematicaRepository.class);
+		NoticiaOrgaoInstitucionalRepository noticiaOrgaoInstitucionalRepository = context.getBean(NoticiaOrgaoInstitucionalRepository.class);
+		NoticiaRepository noticiaRepository = context.getBean(NoticiaRepository.class);
+
+		int idOrgaoInstitucional1 = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Detran"));
+		int idOrgaoInstitucional2 = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Outro"));
+		int idAreaTematica = repoAreaTematicaRepository.inserir(new AreaTematica(null, "Detran"));
         byte[] image1 = Files.readAllBytes(Paths.get("./placeholder/1.jpg"));
         byte[] image2 = Files.readAllBytes(Paths.get("./placeholder/3.jpg"));
         byte[] image3 = Files.readAllBytes(Paths.get("./placeholder/4.jpg"));
@@ -41,26 +46,73 @@ public class DesafioApplication {
 		Noticia noticia2 = new Noticia(null, "Avanços na Agricultura de Precisão com IA no Campo", null, 6, "Ana Silva", image1);
 		Noticia noticia3 = new Noticia(null, "Senar Goiás lança plataforma de ensino com IA integrada", null, 7, "Carlos Souza", image2);
 		
-		NoticiaRepository noticiaRepository = context.getBean(NoticiaRepository.class);
 		int idNoticia = noticiaRepository.inserir(noticia);
-		int idNoticia2 = noticiaRepository.inserir(noticia2);
-		int idNoticia3 = noticiaRepository.inserir(noticia3);
 
-		noticiaRepository.inserir(new Noticia(null, "Produtores rurais inovam com uso de drones inteligentes", Timestamp.valueOf("2025-05-24 10:15:30"), 5, "Fernanda Lima", image3));
-		noticiaRepository.inserir(new Noticia(null, "Capacitação tecnológica transforma o agronegócio goiano", Timestamp.valueOf("2025-05-22 16:47:12"), 9, "Marcos Pereira", image1));
-		noticiaRepository.inserir(new Noticia(null, "Como a inteligência artificial está otimizando a pecuária", Timestamp.valueOf("2025-05-25 09:05:45"), 8, "Juliana Rocha", image2));
-		noticiaRepository.inserir(new Noticia(null, "Senar oferece cursos gratuitos de IA aplicada ao campo", Timestamp.valueOf("2025-05-23 13:22:18"), 6, "Ricardo Almeida", image3));
-		noticiaRepository.inserir(new Noticia(null, "Transformação digital no agronegócio: desafios e soluções", Timestamp.valueOf("2025-05-21 11:30:50"), 7, "Patrícia Gomes", image1));
-		noticiaRepository.inserir(new Noticia(null, "Uso de sensores inteligentes melhora produtividade rural", Timestamp.valueOf("2025-05-20 15:08:09"), 5, "Thiago Fernandes", image2));
-		noticiaRepository.inserir(new Noticia(null, "IA e Big Data revolucionam a gestão agrícola em Goiás", Timestamp.valueOf("2025-05-25 17:54:37"), 8, "Camila Ribeiro", image3));
-		noticiaRepository.inserir(new Noticia(null, "Tecnologia e sustentabilidade: o futuro do agro", Timestamp.valueOf("2025-05-22 08:41:02"), 9, "Bruno Costa", image1));
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia, idAreaTematica));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia, idOrgaoInstitucional1));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia, idOrgaoInstitucional2));
+
+		int idEmbrapa = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Embrapa"));
+		int idMapa = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Ministério da Agricultura"));
+		int idSebrae = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "Sebrae"));
+		int idSenai = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "SENAI Goiás"));
+		int idIfGoiano = repoOrgaoInstitucional.inserir(new OrgaoInstitucional(null, "IF Goiano"));
+
+		int idAgroTech = repoAreaTematicaRepository.inserir(new AreaTematica(null, "AgroTech"));
+		int idSustentabilidade = repoAreaTematicaRepository.inserir(new AreaTematica(null, "Sustentabilidade"));
+		int idEducacaoRural = repoAreaTematicaRepository.inserir(new AreaTematica(null, "Educação Rural"));
+		int idGestaoAgricola = repoAreaTematicaRepository.inserir(new AreaTematica(null, "Gestão Agrícola"));
+		int idInovacao = repoAreaTematicaRepository.inserir(new AreaTematica(null, "Inovação no Agro"));
 
 
+		int idNoticia4 = noticiaRepository.inserir(new Noticia(null,
+			"Embrapa lança sistema de IA para monitoramento de solos no Brasil",
+			Timestamp.valueOf("2025-05-14 09:30:00"), 7, "Rafael Souza", image2));
 
-		context.getBean(NoticiaAreaTematicaRepository.class).inserir(new NoticiaAreaTematica(null, idNoticia, idAreaTematica));
-		context.getBean(NoticiaOrgaoInstitucionalRepository.class).inserir(new NoticiaOrgaoInstitucional(null, idNoticia, idOrgaoInstitucional1));
-		context.getBean(NoticiaOrgaoInstitucionalRepository.class).inserir(new NoticiaOrgaoInstitucional(null, idNoticia, idOrgaoInstitucional2));
+		int idNoticia5 = noticiaRepository.inserir(new Noticia(null,
+			"Ministério da Agricultura investe em drones para fiscalizar áreas rurais",
+			Timestamp.valueOf("2025-05-20 14:10:45"), 6, "Luciana Costa", image3));
 
+		int idNoticia6 = noticiaRepository.inserir(new Noticia(null,
+			"Sebrae oferece capacitação gratuita em tecnologia para pequenos produtores",
+			Timestamp.valueOf("2025-05-18 10:25:37"), 5, "Gabriel Lima", image1));
 
+		int idNoticia7 = noticiaRepository.inserir(new Noticia(null,
+			"SENAI Goiás implementa IA em cursos técnicos voltados ao agronegócio",
+			Timestamp.valueOf("2025-05-23 16:45:12"), 8, "Fernanda Oliveira", image2));
+
+		int idNoticia8 = noticiaRepository.inserir(new Noticia(null,
+			"IF Goiano desenvolve sensores inteligentes para monitoramento de plantações",
+			Timestamp.valueOf("2025-05-10 08:50:00"), 9, "Bruno Martins", image3));
+
+		int idNoticia9 = noticiaRepository.inserir(new Noticia(null,
+			"Inteligência Artificial ajuda no combate às pragas nas lavouras brasileiras",
+			Timestamp.valueOf("2025-05-25 11:15:20"), 8, "Juliana Mendes", image1));
+
+		int idNoticia10 = noticiaRepository.inserir(new Noticia(null,
+			"Uso de blockchain garante rastreabilidade na cadeia produtiva agrícola",
+			Timestamp.valueOf("2025-05-15 15:40:33"), 7, "Thiago Barbosa", image2));
+
+		int idNoticia11 = noticiaRepository.inserir(new Noticia(null,
+			"Agricultura regenerativa ganha força no Brasil com apoio de IA",
+			Timestamp.valueOf("2025-05-19 09:05:22"), 9, "Patrícia Ferreira", image3));
+
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia4, idGestaoAgricola));
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia5, idInovacao));
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia6, idEducacaoRural));
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia7, idAgroTech));
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia8, idAgroTech));
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia9, idSustentabilidade));
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia10, idGestaoAgricola));
+		noticiaAreaTematicaRepository.inserir(new NoticiaAreaTematica(null, idNoticia11, idSustentabilidade));
+
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia4, idEmbrapa));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia5, idMapa));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia6, idSebrae));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia7, idSenai));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia8, idIfGoiano));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia9, idEmbrapa));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia10, idMapa));
+		noticiaOrgaoInstitucionalRepository.inserir(new NoticiaOrgaoInstitucional(null, idNoticia11, idEmbrapa));
 	}
 }
