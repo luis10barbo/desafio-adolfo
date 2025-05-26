@@ -97,4 +97,9 @@ export class AppComponent implements AfterViewInit {
   verMaisNoticias() {
     this.adquirirNoticias(this.proximoOffset);
   }
+
+  cancelarPesquisa() {
+    this.noticias = [];
+    this.temProximaPagina = false;
+  }
 }

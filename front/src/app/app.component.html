@@ -61,8 +61,8 @@
 
       <div class="row">
         <button class="limpar-filtros" (click)="limparFiltros()">Limpar Filtros</button>
-        <p-button label="Cancelar" class="cancelar-botao"></p-button>
-        <p-button label="Aplicar Filtro" class="aplicar-filtro-botao" (onClick)="pesquisarNoticias()"></p-button>
+        <p-button label="Cancelar" class="cancelar-botao" (onClick)="cancelarPesquisa()"></p-button>
+        <p-button label="Pesquisar" class="aplicar-filtro-botao" (onClick)="pesquisarNoticias()"></p-button>
       </div>
 
     </div>
@@ -77,6 +77,8 @@
       <!-- @for (noticia of noticias; track noticia.id) { -->
         <app-noticia [noticia]="noticia" *ngFor="let noticia of noticias"></app-noticia>
     </div>
+    <p *ngIf="noticias.length < 1">Clique em Pesquisar para pesquisar notícias. Caso queira pesquisar notícias sem um filtro, clique em limpar filtro antes de Pesquisar.</p>
+
   </section>
   <button *ngIf="temProximaPagina" class="ver-mais-noticias" (click)="verMaisNoticias()">Ver mais notícias</button>
 </div>
