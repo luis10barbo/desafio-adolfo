@@ -109,7 +109,7 @@ public class NoticiaRepository extends BaseRepository<Noticia> implements Querie
         }
 
         if (whereClauses.size() > 0) {
-            whereString = "WHERE " + String.join(" OR ", whereClauses);
+            whereString = "WHERE " + String.join(" AND ", whereClauses);
         }
         // --- Fim Adicao Where ---
 
